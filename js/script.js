@@ -134,7 +134,7 @@ function genererPDF(data){
   const {jsPDF}=window.jspdf;
   const doc=new jsPDF();
   doc.setFontSize(18); doc.text("ETS LE REPERE",105,20,{align:"center"});
-  doc.setFontSize(10); doc.text("Bafoussam - Carrefour Auberge | Tel: 681 96 08 76",105,26,{align:"center"});
+  doc.setFontSize(10); doc.text("BERTOUA - MOKOLO 4 | Tel: 681 96 08 76",105,26,{align:"center"});
   doc.line(10,30,200,30);
   doc.setFontSize(14); doc.text("RECU DE PAIEMENT",105,40,{align:"center"});
   doc.setFontSize(11);
