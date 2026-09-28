@@ -94,3 +94,7 @@ contactForm?.addEventListener("submit", event => {
 
     window.open(`https://wa.me/237681960876?text=${text}`, "_blank");
 });
+let methodeChoisie="";
+function ouvrirPaiement(m){methodeChoisie=m;document.getElementById("titrePaiement").innerText="Payer avec "+m;document.getElementById("modalPaiement").style.display="flex";}
+function fermerPaiement(){document.getElementById("modalPaiement").style.display="none";}
+function envoyerWhatsApp(){const t=document.getElementById("telClient").value;const mo=document.getElementById("montantClient").value;if(!t||!mo){alert("Entre numero et montant");return;}window.open(`https://wa.me/237681960876?text=Bonjour ETS LE REPERE%0AMethode: ${methodeChoisie}%0ANumero: ${t}%0AMontant: ${mo} FCFA`,"_blank");fermerPaiement();}

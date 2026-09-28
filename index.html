@@ -302,9 +302,9 @@
 
         <div class="tab-content" id="paiement">
             <div class="payment-grid">
-                <div><i class="fa-solid fa-mobile-screen-button"></i><strong>Orange Money</strong></div>
-                <div><i class="fa-solid fa-mobile-screen-button"></i><strong>MTN Money</strong></div>
-                <div><i class="fa-solid fa-tv"></i><strong>Point agréé Canal+</strong></div>
+                <div onclick="ouvrirPaiement('Orange Money')" style="cursor:pointer;"><i class="fa-solid fa-mobile-screen-button"></i><strong> Orange Money</strong></div>
+                <div onclick="ouvrirPaiement('MTN Money')" style="cursor:pointer;"><i class="fa-solid fa-mobile-screen-button"></i><strong> MTN Money</strong></div>
+                <div onclick="ouvrirPaiement('Point agréé Canal+')" style="cursor:pointer;"><i class="fa-solid fa-tv"></i><strong> Point agréé Canal+</strong></div>
             </div>
         </div>
 
@@ -393,5 +393,14 @@
 </div>
 
 <script src="js/script.js"></script>
+<div id="modalPaiement" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.7); z-index:9999; justify-content:center; align-items:center;">
+  <div style="background:white; padding:25px; border-radius:20px; width:90%; max-width:350px;">
+    <h2 id="titrePaiement" style="text-align:center; color:black;"></h2>
+    <input id="telClient" type="tel" placeholder="6xx xx xx xx" style="width:100%; padding:12px; border-radius:10px; border:1px solid #ccc; margin-top:15px;">
+    <input id="montantClient" type="number" placeholder="Montant FCFA" style="width:100%; padding:12px; border-radius:10px; border:1px solid #ccc; margin-top:10px;">
+    <button onclick="envoyerWhatsApp()" style="width:100%; background:#16a34a; color:white; padding:12px; border-radius:10px; border:none; font-weight:bold; margin-top:20px;">Envoyer sur WhatsApp</button>
+    <button onclick="fermerPaiement()" style="width:100%; background:none; border:none; color:gray; margin-top:10px;">Annuler</button>
+  </div>
+</div>
 </body>
 </html>
