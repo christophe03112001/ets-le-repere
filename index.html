@@ -13,6 +13,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </head>
 
 <body>
@@ -396,10 +397,21 @@
 <div id="modalPaiement" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.7); z-index:9999; justify-content:center; align-items:center;">
   <div style="background:white; padding:25px; border-radius:20px; width:90%; max-width:350px;">
     <h2 id="titrePaiement" style="text-align:center; color:black;"></h2>
-    <input id="telClient" type="tel" placeholder="6xx xx xx xx" style="width:100%; padding:12px; border-radius:10px; border:1px solid #ccc; margin-top:15px;">
+    <input id="telClient" type="tel" placeholder="Numero WhatsApp client (6xx)" style="width:100%; padding:12px; border-radius:10px; border:1px solid #ccc; margin-top:15px;">
     <input id="montantClient" type="number" placeholder="Montant FCFA" style="width:100%; padding:12px; border-radius:10px; border:1px solid #ccc; margin-top:10px;">
-    <button onclick="envoyerWhatsApp()" style="width:100%; background:#16a34a; color:white; padding:12px; border-radius:10px; border:none; font-weight:bold; margin-top:20px;">Envoyer sur WhatsApp</button>
+    <button onclick="envoyerWhatsApp()" style="width:100%; background:#16a34a; color:white; padding:12px; border-radius:10px; border:none; font-weight:bold; margin-top:20px;">Payer & Recevoir le Reçu</button>
     <button onclick="fermerPaiement()" style="width:100%; background:none; border:none; color:gray; margin-top:10px;">Annuler</button>
+  </div>
+</div>
+
+<div id="modalRecu" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.7); z-index:10000; justify-content:center; align-items:center;">
+  <div style="background:white; padding:25px; border-radius:20px; width:90%; max-width:380px; color:black; text-align:center;">
+    <h2 style="color:#16a34a;">✅ Paiement Envoyé !</h2>
+    <p style="font-size:14px;">Reçu <strong id="recuNum"></strong> généré</p>
+    <p id="recuDetails" style="font-size:13px; background:#f9f9f9; padding:10px; border-radius:10px; text-align:left;"></p>
+    <button id="btnDownload" style="width:100%; background:black; color:white; padding:12px; border-radius:10px; border:none; font-weight:bold; margin-top:10px;">📥 Télécharger le PDF</button>
+    <button id="btnSendClient" style="width:100%; background:#25D366; color:white; padding:12px; border-radius:10px; border:none; font-weight:bold; margin-top:10px;">📲 Envoyer le reçu au client</button>
+    <button onclick="document.getElementById('modalRecu').style.display='none'" style="width:100%; background:none; border:none; color:gray; margin-top:10px;">Fermer</button>
   </div>
 </div>
 </body>
