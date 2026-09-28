@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.ton-domaine.com/sitemap.xml
+Sitemap: https://christopher03112001.github.io/ets-le-repere/sitemap.xml
