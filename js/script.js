@@ -111,10 +111,24 @@ function envoyerWhatsApp(){
   document.getElementById("recuDetails").innerHTML=`<b>Méthode:</b> ${methodeChoisie}<br><b>Client:</b> ${t}<br><b>Montant:</b> ${mo} FCFA<br><b>Date:</b> ${dateNow}`;
   document.getElementById("modalRecu").style.display="flex";
   document.getElementById("btnDownload").onclick=()=>{ dernierRecu.doc.save(`Recu-${numRecu}.pdf`); };
-  document.getElementById("btnSendClient").onclick=()=>{
-    const telClientWhatsApp = t.startsWith("237")?t:"237"+t.replace(/\s/g,'');
-    window.open(`https://wa.me/${telClientWhatsApp}?text=Bonjour! Voici votre recu ETS LE REPERE%0A%0ARecu: ${numRecu}%0AMontant: ${mo} FCFA%0AMethode: ${methodeChoisie}%0ADate: ${dateNow}`,"_blank");
-  };
+  document.getElementById("btnSendClient").onclick= async ()=>{
+  const pdfBlob = dernierRecu.doc.output('blob');
+  const pdfFile = new File([pdfBlob], `Recu-${dernierRecu.num}.pdf`, {type:"application/pdf"});
+  const telClientWhatsApp = t.startsWith("237")?t:"237"+t.replace(/\s/g,'');
+  if(navigator.canShare && navigator.canShare({files:[pdfFile]})){
+    try{
+      await navigator.share({
+        files:[pdfFile],
+        title:`Recu ${dernierRecu.num}`,
+        text:`Bonjour! Voici votre recu ETS LE REPERE - ${dernierRecu.montant} FCFA`
+      });
+    }catch(e){}
+  } else {
+    dernierRecu.doc.save(`Recu-${dernierRecu.num}.pdf`);
+    alert("PDF telecharge! Maintenant selectionne le PDF dans WhatsApp pour l'envoyer.");
+    window.open(`https://wa.me/${telClientWhatsApp}?text=Bonjour! Votre recu ${dernierRecu.num} de ${dernierRecu.montant} FCFA est pret. Je vous envoie le PDF a l'instant.`,"_blank");
+  }
+};
 }
 function genererPDF(data){
   const {jsPDF}=window.jspdf;
